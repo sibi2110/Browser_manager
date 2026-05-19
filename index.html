@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browser Manager</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="nav-rail">
+      <div class="brand-mark">BM</div>
+      <nav class="nav-stack">
+        <button id="nav-open" class="nav-button active" type="button" data-view="open" title="Open windows">OW</button>
+        <button id="nav-saved" class="nav-button" type="button" data-view="saved" title="Saved windows">SV</button>
+        <button id="nav-groups" class="nav-button" type="button" data-view="groups" title="Group management">GP</button>
+      </nav>
+      <button id="refresh-dashboard" class="nav-button nav-button-muted" type="button" title="Refresh">RF</button>
+    </aside>
+
+    <aside class="sidebar">
+      <header class="sidebar-header">
+        <div>
+          <p class="eyebrow">Brave Extension</p>
+          <h1>TabFlow</h1>
+        </div>
+        <p id="sidebar-caption" class="sidebar-caption">Open windows</p>
+      </header>
+
+      <section class="search-shell">
+        <input id="search-input" type="search" placeholder="Search tabs, URLs, groups">
+      </section>
+
+      <section class="list-shell">
+        <div class="list-header">
+          <h2 id="list-title">Open Windows</h2>
+          <span id="list-count" class="count-pill">0</span>
+        </div>
+        <div id="sidebar-list" class="sidebar-list"></div>
+      </section>
+    </aside>
+
+    <main class="workspace">
+      <section id="empty-state" class="empty-state">
+        <p class="eyebrow">No Selection</p>
+        <h2>Select a window from the left.</h2>
+        <p>Use the rail to switch between live windows, saved windows, and group management.</p>
+      </section>
+
+      <section id="detail-view" class="detail-view hidden">
+        <header class="detail-header">
+          <div>
+            <p id="detail-kind" class="eyebrow">Open Window</p>
+            <h2 id="detail-title"></h2>
+            <p id="detail-subtitle" class="detail-subtitle"></p>
+          </div>
+          <div class="detail-actions-shell">
+            <button id="rename-window" class="ghost-button small" type="button">Rename</button>
+            <div id="detail-actions" class="detail-actions"></div>
+          </div>
+        </header>
+
+        <section id="rename-panel" class="panel hidden">
+          <div class="panel-label-row">
+            <h3>Rename Window</h3>
+          </div>
+          <form id="rename-form" class="compact-form">
+            <input id="rename-input" type="text" placeholder="Window name" required>
+            <button type="submit">Save</button>
+            <button id="rename-cancel" class="ghost-button" type="button">Cancel</button>
+          </form>
+        </section>
+
+        <section id="group-summary" class="group-summary hidden">
+          <div class="panel-label-row">
+            <h3>Groups</h3>
+            <span id="group-total" class="micro-pill">0</span>
+          </div>
+          <div id="group-chip-list" class="chip-list"></div>
+        </section>
+
+        <section id="group-manager" class="panel hidden">
+          <div class="panel-label-row">
+            <h3>Group Management</h3>
+            <span class="micro-pill">Live</span>
+          </div>
+          <form id="group-form" class="compact-form">
+            <input id="group-name" name="groupName" type="text" placeholder="Create group" required>
+            <select id="group-color" name="groupColor" aria-label="Group color">
+              <option value="slate">Slate</option>
+              <option value="blue">Blue</option>
+              <option value="green">Green</option>
+              <option value="amber">Amber</option>
+              <option value="red">Red</option>
+              <option value="purple">Purple</option>
+            </select>
+            <button type="submit">Add Group</button>
+          </form>
+          <div id="group-list" class="group-list"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-label-row">
+            <h3 id="tabs-title">Tabs</h3>
+            <span id="page-total" class="micro-pill">0</span>
+          </div>
+          <div id="tab-list" class="tab-list"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <template id="sidebar-item-template">
+    <button class="sidebar-item" type="button">
+      <div class="sidebar-item-top">
+        <strong class="item-name"></strong>
+        <span class="item-badge"></span>
+      </div>
+      <p class="item-meta"></p>
+    </button>
+  </template>
+
+  <template id="group-item-template">
+    <article class="group-row">
+      <div>
+        <strong class="group-title"></strong>
+        <p class="group-meta"></p>
+      </div>
+      <div class="group-row-actions">
+        <select class="group-color-select" aria-label="Group color">
+          <option value="slate">Slate</option>
+          <option value="blue">Blue</option>
+          <option value="green">Green</option>
+          <option value="amber">Amber</option>
+          <option value="red">Red</option>
+          <option value="purple">Purple</option>
+        </select>
+        <button class="danger-button small remove-group" type="button">Delete</button>
+      </div>
+    </article>
+  </template>
+
+  <template id="tab-item-template">
+    <article class="tab-row">
+      <div class="tab-copy">
+        <p class="tab-title"></p>
+        <p class="tab-url"></p>
+      </div>
+      <div class="tab-meta">
+        <p class="tab-badges"></p>
+        <select class="group-select hidden"></select>
+      </div>
+    </article>
+  </template>
+
+  <template id="group-chip-template">
+    <span class="group-chip"></span>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Browser Manager",
+  "version": "1.0.0",
+  "description": "Manage existing Brave browser windows, tab groupings, and saved window snapshots.",
+  "permissions": [
+    "storage",
+    "tabs",
+    "windows",
+    "sidePanel"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "index.html"
+  },
+  "action": {
+    "default_title": "Browser Manager"
+  }
+}
